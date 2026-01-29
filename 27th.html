@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Visitor Counter</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    /* Global Styles */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Roboto', sans-serif;
+      text-align: center;
+      background: linear-gradient(135deg, #6dd5fa, #ffffff);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: #333;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      color: #00796b;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 1.2rem;
+      color: #555;
+      margin-bottom: 40px;
+    }
+
+    .counter-box {
+      background: linear-gradient(to right, #ffd700, #ff8c00);
+      padding: 40px 60px;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      color: #fff;
+      font-size: 2rem;
+      font-weight: bold;
+      margin-bottom: 20px;
+      transition: transform 0.3s;
+    }
+
+    .counter-box:hover {
+      transform: scale(1.05);
+    }
+
+    .message {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+      color: #004d40;
+    }
+
+    button {
+      padding: 10px 25px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 10px;
+      background-color: #00796b;
+      color: #fff;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    button:hover {
+      background-color: #004d40;
+    }
+
+    /* Responsive */
+    @media(max-width:600px){
+      .counter-box {
+        padding: 30px 20px;
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Welcome to Our Website!</h1>
+  <p>See how many times you’ve visited this page!</p>
+
+  <div class="counter-box" id="visitorCount">0</div>
+  <div class="message" id="greetingMessage"></div>
+  <button onclick="resetCounter()">Reset Counter</button>
+
+  <script>
+    // Function to animate counter
+    function animateCounter(from, to, duration) {
+      let start = null;
+      const step = timestamp => {
+        if (!start) start = timestamp;
+        const progress = timestamp - start;
+        const value = Math.min(Math.floor(from + (to - from) * (progress / duration)), to);
+        document.getElementById("visitorCount").innerText = value;
+        if (progress < duration) {
+          window.requestAnimationFrame(step);
+        }
+      };
+      window.requestAnimationFrame(step);
+    }
+
+    // Get count from localStorage (persistent per browser)
+    let count = localStorage.getItem("visitorCount");
+    if (count === null) {
+      count = 1;
+    } else {
+      count = parseInt(count) + 1;
+    }
+    localStorage.setItem("visitorCount", count);
+
+    // Animate counter from previous number to current
+    const previousCount = count - 1;
+    animateCounter(previousCount, count, 1000);
+
+    // Greeting message based on visit count
+    const greeting = document.getElementById("greetingMessage");
+    if (count === 1) {
+      greeting.innerText = "This is your first visit! Welcome!";
+    } else if (count <= 5) {
+      greeting.innerText = `You’ve visited us ${count} times! Thanks for coming back!`;
+    } else {
+      greeting.innerText = `Wow! You’ve visited us ${count} times! We appreciate your loyalty!`;
+    }
+
+    // Reset counter button
+    function resetCounter() {
+      localStorage.setItem("visitorCount", 0);
+      document.getElementById("visitorCount").innerText = 0;
+      greeting.innerText = "Counter has been reset!";
+    }
+  </script>
+
+</body>
+</html>

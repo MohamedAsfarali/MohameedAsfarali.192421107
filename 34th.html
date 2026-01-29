@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Travel Items Planner</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(120deg, #89f7fe, #66a6ff);
+    min-height: 100vh;
+}
+
+/* ---------- HEADER ---------- */
+header {
+    position: sticky;
+    top: 0;
+    background: #ffffffdd;
+    backdrop-filter: blur(10px);
+    padding: 15px;
+    text-align: center;
+    font-size: 28px;
+    font-weight: bold;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+    z-index: 10;
+}
+
+/* ---------- CONTAINER ---------- */
+.container {
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 20px;
+}
+
+/* ---------- CARD ---------- */
+.card {
+    background: white;
+    border-radius: 18px;
+    padding: 25px;
+    margin-bottom: 25px;
+    box-shadow: 0 20px 35px rgba(0,0,0,0.25);
+    animation: fadeUp 0.9s ease;
+}
+
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(25px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+h3 {
+    margin-bottom: 15px;
+    color: #333;
+}
+
+ul, ol {
+    margin-left: 20px;
+}
+
+li {
+    margin: 10px 0;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+li:hover {
+    transform: translateX(8px);
+}
+
+/* ---------- CHECKLIST ---------- */
+.checklist li {
+    list-style: none;
+    padding: 10px;
+    border-radius: 10px;
+    background: #f5f7ff;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.checklist input {
+    transform: scale(1.2);
+}
+
+.badge {
+    background: #ff7675;
+    color: white;
+    font-size: 12px;
+    padding: 2px 8px;
+    border-radius: 20px;
+    margin-left: 6px;
+}
+
+.optional {
+    background: #74b9ff;
+}
+
+/* ---------- FOOTER ---------- */
+footer {
+    text-align: center;
+    padding: 20px;
+    font-size: 14px;
+    opacity: 0.85;
+}
+</style>
+</head>
+
+<body>
+
+<header>🧳 Travel Items Planner</header>
+
+<div class="container">
+
+    <!-- UNORDERED LIST -->
+    <div class="card">
+        <h3>📦 Unordered List – Travel Essentials</h3>
+        <p>Items carried during travel where order is not important:</p>
+
+        <ul>
+            <li>👕 Clothes</li>
+            <li>🪥 Toiletries</li>
+            <li>📱 Mobile Phone</li>
+            <li>🔌 Charger & Power Bank</li>
+            <li>🥤 Water Bottle</li>
+        </ul>
+    </div>
+
+    <!-- ORDERED LIST -->
+    <div class="card">
+        <h3>📝 Ordered List – Travel Preparation Steps</h3>
+        <p>Steps followed in sequence during travel:</p>
+
+        <ol>
+            <li>Plan the trip</li>
+            <li>Pack clothes and essentials</li>
+            <li>Keep documents safely</li>
+            <li>Charge electronic devices</li>
+            <li>Lock the house</li>
+            <li>Start the journey</li>
+        </ol>
+    </div>
+
+    <!-- NESTED LIST -->
+    <div class="card">
+        <h3>🎒 Nested List – Travel Bag Contents</h3>
+
+        <ul>
+            <li>Travel Bag
+                <ul>
+                    <li>👚 Clothing Set</li>
+                    <li>🧴 Toiletry Kit</li>
+                    <li>📄 Documents Folder</li>
+                    <li>💊 Medicines</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <!-- CHECKLIST FEATURE -->
+    <div class="card">
+        <h3>✅ Packing Checklist (Interactive)</h3>
+
+        <ul class="checklist">
+            <li><input type="checkbox"> ID Proof & Tickets <span class="badge">Important</span></li>
+            <li><input type="checkbox"> Mobile Phone</li>
+            <li><input type="checkbox"> Charger <span class="badge optional">Optional</span></li>
+            <li><input type="checkbox"> Clothes</li>
+            <li><input type="checkbox"> Medicines <span class="badge">Important</span></li>
+        </ul>
+    </div>
+
+</div>
+
+<footer>
+    © 2026 Travel Planner Website | HTML Lists Demonstration
+</footer>
+
+</body>
+</html>

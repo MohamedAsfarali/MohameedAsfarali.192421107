@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>CSS Positioning Demo</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #74ebd5, #9face6);
+    padding: 30px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+p.subtitle {
+    text-align: center;
+    color: #333;
+    margin-bottom: 40px;
+}
+
+/* ---------- LAYOUT ---------- */
+.wrapper {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+/* ---------- CARD ---------- */
+.card {
+    background: white;
+    width: 420px;
+    border-radius: 16px;
+    padding: 25px;
+    box-shadow: 0 20px 35px rgba(0,0,0,0.25);
+    animation: fadeIn 1s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.card h2 {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+/* ---------- PARENT ---------- */
+.parent {
+    height: 230px;
+    border: 2px dashed #555;
+    padding: 15px;
+    margin-top: 20px;
+    position: relative;
+    background: #f9fafc;
+}
+
+/* ---------- CHILD ---------- */
+.box {
+    width: 150px;
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+    color: white;
+    font-weight: bold;
+    border-radius: 10px;
+    transition: 0.6s;
+}
+
+/* RELATIVE */
+.relative-box {
+    background: #667eea;
+    position: relative;
+    top: 0;
+    left: 0;
+}
+
+/* ABSOLUTE */
+.absolute-box {
+    background: #e17055;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+/* ---------- MOVE ---------- */
+.move {
+    top: 60px !important;
+    left: 80px !important;
+}
+
+/* ---------- BUTTON ---------- */
+button {
+    margin-top: 20px;
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    background: #6c5ce7;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #4834d4;
+}
+
+.info {
+    margin-top: 15px;
+    font-size: 14px;
+    color: #333;
+    text-align: center;
+}
+</style>
+</head>
+
+<body>
+
+<h1>CSS Positioning Demonstration</h1>
+<p class="subtitle">Relative vs Absolute Positioning</p>
+
+<div class="wrapper">
+
+    <!-- RELATIVE CARD -->
+    <div class="card">
+        <h2>Relative Positioning</h2>
+
+        <div class="parent">
+            Parent Element
+            <div id="relativeBox" class="box relative-box">
+                Relative Box
+            </div>
+        </div>
+
+        <button onclick="moveRelative()">Move Relative Box</button>
+
+        <div class="info">
+            The element moves <b>relative to its own original position</b>.
+            Space is preserved.
+        </div>
+    </div>
+
+    <!-- ABSOLUTE CARD -->
+    <div class="card">
+        <h2>Absolute Positioning</h2>
+
+        <div class="parent">
+            Parent Element
+            <div id="absoluteBox" class="box absolute-box">
+                Absolute Box
+            </div>
+        </div>
+
+        <button onclick="moveAbsolute()">Move Absolute Box</button>
+
+        <div class="info">
+            The element moves <b>relative to the parent element</b>
+            and does not preserve space.
+        </div>
+    </div>
+
+</div>
+
+<script>
+function moveRelative() {
+    document.getElementById("relativeBox").classList.toggle("move");
+}
+
+function moveAbsolute() {
+    document.getElementById("absoluteBox").classList.toggle("move");
+}
+</script>
+
+</body>
+</html>

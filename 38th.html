@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Student Registration Form</title>
+<style>
+/* ---------- BODY ---------- */
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(120deg, #89f7fe, #66a6ff);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+/* ---------- FORM / SUCCESS BOX ---------- */
+.container {
+    background: rgba(255,255,255,0.2);
+    backdrop-filter: blur(12px);
+    padding: 40px 50px;
+    border-radius: 20px;
+    width: 500px;
+    max-width: 90%;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    color: white;
+    text-align: center;
+    position: relative;
+}
+
+h2 {
+    margin-bottom: 25px;
+    text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+}
+
+label {
+    display: block;
+    margin-top: 15px;
+    font-weight: bold;
+    text-align: left;
+}
+
+input, select {
+    width: 100%;
+    padding: 12px;
+    margin-top: 5px;
+    border-radius: 12px;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+input:focus, select:focus {
+    box-shadow: 0 0 10px #6c5ce7;
+}
+
+button {
+    margin-top: 25px;
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 25px;
+    background: #6c5ce7;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.4s;
+}
+
+button:hover {
+    background: #4834d4;
+    transform: scale(1.05);
+}
+
+.success-box {
+    display: none;
+    animation: fadeSlide 1s ease;
+}
+
+@keyframes fadeSlide {
+    from { opacity: 0; transform: translateY(20px);}
+    to { opacity: 1; transform: translateY(0);}
+}
+</style>
+</head>
+<body>
+
+<div class="container" id="formContainer">
+    <h2>Student Registration Form</h2>
+    <form id="studentForm">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" placeholder="Enter full name" required>
+
+        <label for="email">Email</label>
+        <input type="email" id="email" placeholder="Enter email" required>
+
+        <label for="dob">Date of Birth</label>
+        <input type="date" id="dob" required>
+
+        <label>Gender</label>
+        <input type="radio" name="gender" value="Male" required> Male
+        <input type="radio" name="gender" value="Female"> Female
+        <input type="radio" name="gender" value="Other"> Other
+
+        <label for="course">Course</label>
+        <select id="course" required>
+            <option value="">Select Course</option>
+            <option value="BSc Computer Science">BSc Computer Science</option>
+            <option value="BCom">BCom</option>
+            <option value="BA English">BA English</option>
+            <option value="BTech IT">BTech IT</option>
+        </select>
+
+        <label for="mobile">Mobile Number</label>
+        <input type="number" id="mobile" placeholder="Enter mobile number" required>
+
+        <button type="submit">Register Student</button>
+    </form>
+</div>
+
+<!-- Success Message -->
+<div class="container success-box" id="successContainer">
+    <h2>Registration Successful!</h2>
+    <p>Thank you, <span id="studentName"></span>, for registering.</p>
+    <p><b>Details Submitted:</b></p>
+    <ul id="studentDetails" style="text-align:left;"></ul>
+    <button onclick="backToForm()">Register Another Student</button>
+</div>
+
+<script>
+// Handle form submission
+document.getElementById("studentForm").addEventListener("submit", function(e){
+    e.preventDefault(); // prevent page reload
+
+    // Get values
+    let name = document.getElementById("name").value;
+    let email = document.getElementById("email").value;
+    let dob = document.getElementById("dob").value;
+    let gender = document.querySelector('input[name="gender"]:checked').value;
+    let course = document.getElementById("course").value;
+    let mobile = document.getElementById("mobile").value;
+
+    // Display success container
+    document.getElementById("formContainer").style.display = "none";
+    document.getElementById("successContainer").style.display = "block";
+
+    // Set student info
+    document.getElementById("studentName").textContent = name;
+    document.getElementById("studentDetails").innerHTML = `
+        <li><b>Email:</b> ${email}</li>
+        <li><b>Date of Birth:</b> ${dob}</li>
+        <li><b>Gender:</b> ${gender}</li>
+        <li><b>Course:</b> ${course}</li>
+        <li><b>Mobile:</b> ${mobile}</li>
+    `;
+});
+
+// Back to form
+function backToForm(){
+    document.getElementById("studentForm").reset();
+    document.getElementById("successContainer").style.display = "none";
+    document.getElementById("formContainer").style.display = "block";
+}
+</script>
+
+</body>
+</html>

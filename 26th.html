@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>String Operations Tool with Background</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    /* Global body and background */
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      background-image: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      font-family: 'Roboto', sans-serif;
+      color: #fff;
+    }
+
+    /* Header */
+    header {
+      text-align: center;
+      padding: 40px 20px;
+      background: rgba(0, 0, 0, 0.5);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+      color: #ffd700;
+    }
+
+    header p {
+      font-size: 1.2rem;
+      color: #fff;
+    }
+
+    /* Container for cards */
+    .container {
+      max-width: 900px;
+      margin: 30px auto;
+      padding: 0 20px;
+    }
+
+    /* Card styling */
+    .card {
+      background: rgba(0, 0, 0, 0.6);
+      border-radius: 15px;
+      padding: 20px;
+      margin-bottom: 20px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .card:hover {
+      transform: scale(1.02);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+    }
+
+    .card h2 {
+      color: #ffd700;
+      margin-top: 0;
+    }
+
+    /* Input and button styling */
+    input[type="text"], input[type="number"] {
+      padding: 10px;
+      width: 70%;
+      margin-bottom: 10px;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+
+    button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      background-color: #ffd700;
+      color: #000;
+      font-size: 1rem;
+      cursor: pointer;
+      margin-left: 10px;
+      transition: background 0.2s;
+    }
+
+    button:hover {
+      background-color: #ffc107;
+    }
+
+    /* Output box styling */
+    .output {
+      margin-top: 10px;
+      padding: 10px;
+      background-color: rgba(255, 215, 0, 0.2);
+      border-left: 5px solid #ffd700;
+      border-radius: 8px;
+      font-weight: bold;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      margin: 40px 0 20px;
+      color: #ffd700;
+      font-weight: bold;
+    }
+
+    /* Responsive for mobile */
+    @media (max-width: 600px) {
+      input[type="text"], input[type="number"] {
+        width: 100%;
+      }
+      button {
+        margin-left: 0;
+        margin-top: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>String Operations Tool</h1>
+    <p>Interactive string manipulation with a beautiful background</p>
+  </header>
+
+  <div class="container">
+
+    <!-- Input String -->
+    <div class="card">
+      <h2>Enter Your String</h2>
+      <input type="text" id="userString" placeholder="Type something here...">
+    </div>
+
+    <!-- 1. Character at index -->
+    <div class="card">
+      <h2>1. Character at Specified Index</h2>
+      <input type="number" id="charIndex" placeholder="Enter index (0-based)">
+      <button onclick="showCharAt()">Show Character</button>
+      <div class="output" id="charAtOutput"></div>
+    </div>
+
+    <!-- 2. Unicode of character -->
+    <div class="card">
+      <h2>2. Unicode of Character at Index</h2>
+      <input type="number" id="unicodeIndex" placeholder="Enter index (0-based)">
+      <button onclick="showCharCode()">Show Unicode</button>
+      <div class="output" id="charCodeOutput"></div>
+    </div>
+
+    <!-- 3. Join Strings -->
+    <div class="card">
+      <h2>3. Join Strings</h2>
+      <input type="text" id="string1" placeholder="Enter first string">
+      <input type="text" id="string2" placeholder="Enter second string">
+      <button onclick="joinStrings()">Join Strings</button>
+      <div class="output" id="concatOutput"></div>
+    </div>
+
+    <!-- 4. Convert Unicode to String -->
+    <div class="card">
+      <h2>4. Convert Unicode to String</h2>
+      <input type="number" id="unicodeValue" placeholder="Enter Unicode value">
+      <button onclick="unicodeToString()">Convert</button>
+      <div class="output" id="fromCharCodeOutput"></div>
+    </div>
+
+    <!-- 5. Convert String to Uppercase -->
+    <div class="card">
+      <h2>5. Convert String to Uppercase</h2>
+      <button onclick="toUppercase()">Convert</button>
+      <div class="output" id="toUppercaseOutput"></div>
+    </div>
+
+  </div>
+
+  <footer>
+    &copy; 2026 String Operations Tool
+  </footer>
+
+  <script>
+    function showCharAt() {
+      let str = document.getElementById("userString").value;
+      let index = parseInt(document.getElementById("charIndex").value);
+      if(str && index >= 0 && index < str.length) {
+        document.getElementById("charAtOutput").innerText = `Character at index ${index}: "${str.charAt(index)}"`;
+      } else {
+        document.getElementById("charAtOutput").innerText = "Invalid input!";
+      }
+    }
+
+    function showCharCode() {
+      let str = document.getElementById("userString").value;
+      let index = parseInt(document.getElementById("unicodeIndex").value);
+      if(str && index >= 0 && index < str.length) {
+        document.getElementById("charCodeOutput").innerText = `Unicode at index ${index}: ${str.charCodeAt(index)}`;
+      } else {
+        document.getElementById("charCodeOutput").innerText = "Invalid input!";
+      }
+    }
+
+    function joinStrings() {
+      let s1 = document.getElementById("string1").value;
+      let s2 = document.getElementById("string2").value;
+      document.getElementById("concatOutput").innerText = `Joined string: "${s1.concat(" ", s2)}"`;
+    }
+
+    function unicodeToString() {
+      let code = parseInt(document.getElementById("unicodeValue").value);
+      if(!isNaN(code)) {
+        document.getElementById("fromCharCodeOutput").innerText = `String: "${String.fromCharCode(code)}"`;
+      } else {
+        document.getElementById("fromCharCodeOutput").innerText = "Invalid Unicode!";
+      }
+    }
+
+    function toUppercase() {
+      let str = document.getElementById("userString").value;
+      if(str) {
+        document.getElementById("toUppercaseOutput").innerText = `Uppercase: "${str.toUpperCase()}"`;
+      } else {
+        document.getElementById("toUppercaseOutput").innerText = "Enter a string first!";
+      }
+    }
+  </script>
+</body>
+</html>
