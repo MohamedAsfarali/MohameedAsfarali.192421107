@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Nearest Odd Number</title>
+</head>
+<body>
+
+    <h2>Find Nearest Odd Numbers</h2>
+
+    <label>Enter numbers (comma separated):</label><br><br>
+    <input type="text" id="numbers" placeholder="e.g. 10, 7, -8, 4">
+    <br><br>
+
+    <button onclick="findNearestOdd()">Get Nearest Odd</button>
+
+    <h3>Result:</h3>
+    <p id="output"></p>
+
+    <script>
+        function findNearestOdd() {
+            let input = document.getElementById("numbers").value;
+            let nums = input.split(",");
+            let result = [];
+
+            for (let i = 0; i < nums.length; i++) {
+                let num = parseInt(nums[i]);
+
+                if (isNaN(num)) continue;
+
+                if (num % 2 !== 0) {
+                    result.push(num);
+                } else {
+                    result.push(num >= 0 ? num + 1 : num - 1);
+                }
+            }
+
+            document.getElementById("output").innerHTML =
+                result.length > 0 ? result.join(", ") : "No valid numbers entered";
+        }
+    </script>
+
+</body>
+</html>
